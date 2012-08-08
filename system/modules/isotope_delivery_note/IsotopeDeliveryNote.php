@@ -81,8 +81,6 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
 		}
 	}
 
-
-
 	/**
 	 * Find a record by its reference field and return true if it has been found
 	 * @param string
@@ -163,9 +161,7 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
           next;       
       }
       else
-      {
-		    $objImage = $this->Database->prepare("SELECT href_product_img FROM tl_iso_order_items WHERE id=?")->limit(1)->execute($objProduct->cart_id)->fetchAssoc();
-		
+      {		
 			  $arrItems[] = array
 			  (
 				  'raw'				        => $objProduct->getData(),
@@ -176,7 +172,6 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
 				  'price'				      => $objProduct->formatted_price,
 				  'total'				      => $objProduct->formatted_total_price,
 				  'tax_id'			      => $objProduct->tax_id,
-				  'href_img'          => $objImage['href_product_img'],
 			  );
 			}
 		}

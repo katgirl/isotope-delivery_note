@@ -28,4 +28,16 @@
  * @filesource
  */
  
- $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'DeliveryNote';
+$GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'Delivery Note';
+
+$GLOBALS['TL_LANG']['DEPOT']['A'] = 'Lager A';
+$GLOBALS['TL_LANG']['DEPOT']['B'] = 'Lager B';
+$GLOBALS['TL_LANG']['DEPOT']['C'] = 'Lager C';
+$GLOBALS['TL_LANG']['DEPOT']['D'] = 'Lager D';
+
+$GLOBALS['TL_LANG']['ISO']['depot'] = array
+(
+  'Depot',
+  'Please select a depot.',
+);
+

@@ -44,24 +44,4 @@ $GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_notes'] = array
     'Lieferscheine drucken',
     'Eine oder mehrere Lieferscheine in ein Einzeldokument eines bestimmten Bestellstatus\' drucken.'
 );
-$GLOBALS['TL_LANG']['tl_iso_orders']['date_shipped_cpi'] = array
-(
-    'Versanddatum Cupprint Irland',
-    'Geben Sie an wann (Datum) diese Bestellung versandt wurde.',
-);
-$GLOBALS['TL_LANG']['tl_iso_orders']['date_shipped_cpg'] = array
-(
-    'Versanddatum Cupprint Deutschland',
-    'Geben Sie an wann (Datum) diese Bestellung versandt wurde.',
-);
-$GLOBALS['TL_LANG']['tl_iso_orders']['date_shipped_cpnl'] = array
-(
-    'Versanddatum Cupprint Niederlande',
-    'Geben Sie an wann (Datum) diese Bestellung versandt wurde.',
-);
-$GLOBALS['TL_LANG']['tl_iso_orders']['date_shipped_pk'] = array
-(
-    'Versanddatum Pack Kontor',
-    'Geben Sie an wann (Datum) diese Bestellung versandt wurde.',
-);
 

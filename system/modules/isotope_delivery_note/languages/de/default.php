@@ -30,10 +30,10 @@
  
 $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'Lieferschein';
 
-$GLOBALS['TL_LANG']['DEPOT']['CPI'] = 'CupPrint Ireland';
-$GLOBALS['TL_LANG']['DEPOT']['CPNL'] = 'Reclamebeker NL';
-$GLOBALS['TL_LANG']['DEPOT']['PK'] = 'Pack-Kontor';
-$GLOBALS['TL_LANG']['DEPOT']['CPG'] = 'CupPrint Germany';
+$GLOBALS['TL_LANG']['DEPOT']['A'] = 'Lager A';
+$GLOBALS['TL_LANG']['DEPOT']['B'] = 'Lager B';
+$GLOBALS['TL_LANG']['DEPOT']['C'] = 'Lager C';
+$GLOBALS['TL_LANG']['DEPOT']['D'] = 'Lager D';
 
 $GLOBALS['TL_LANG']['ISO']['depot'] = array
 (
