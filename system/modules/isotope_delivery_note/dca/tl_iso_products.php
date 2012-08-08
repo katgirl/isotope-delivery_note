@@ -27,17 +27,19 @@
  * @license    LGPL 
  * @filesource
  */
- 
-$GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'Lieferschein';
 
-$GLOBALS['TL_LANG']['DEPOT']['CPI'] = 'CupPrint Ireland';
-$GLOBALS['TL_LANG']['DEPOT']['CPNL'] = 'Reclamebeker NL';
-$GLOBALS['TL_LANG']['DEPOT']['PK'] = 'Pack-Kontor';
-$GLOBALS['TL_LANG']['DEPOT']['CPG'] = 'CupPrint Germany';
-
-$GLOBALS['TL_LANG']['ISO']['depot'] = array
+// Fields
+$GLOBALS['TL_DCA']['tl_iso_products']['fields']['depot'] = array
 (
-  'Lagerstandort',
-  'Wählen Sie einen zutreffenden Lagerort.',
+	'label'       => &$GLOBALS['TL_LANG']['ISO']['depot'],
+	'exclude'     => true,
+	'inputType'   => 'select',
+	'default'     => 'pending',
+	'options'     => $GLOBALS['ISO_DEPOT'],
+	'reference'   => &$GLOBALS['TL_LANG']['DEPOT'],
+	'eval'        => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+	'attributes'	=> array('legend'=>'shipping_legend'),
 );
+
+
 

@@ -29,17 +29,16 @@
  */
 
 
- $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_note'] = array
- (
-  'DeliveryNoteBackend', 
-  'printDeliveryNote'
- );
  
- $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_notes'] = array
- (
-  'DeliveryNoteBackend', 
-  'printDeliveryNotes'
- );
-
+ // Depots 
+ $GLOBALS['ISO_DEPOT'] = array('CPI', 'CPNL', 'PK', 'CPG');
+ 
+ // BE-Module
+ $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_note'] = array('DeliveryNoteBackend','printDeliveryNote');
+ $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_notes'] = array('DeliveryNoteBackend','printDeliveryNotes');
+ 
+ 
+ // Hooks
+ $GLOBALS['ISO_HOOKS']['generateCollection'][] = array('IsotopeDeliveryNote','generateCollection');
  
 ?>

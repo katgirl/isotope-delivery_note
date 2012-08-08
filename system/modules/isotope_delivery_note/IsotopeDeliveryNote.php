@@ -146,5 +146,43 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
 		return is_array($arrSurcharges) ? $arrSurcharges : array();
 	}
 
+	/**
+	 * Inject transform date
+	 * @param int, string
+	 * @return string
+	 */	
+	public function generateCollection($objTemplate, $objProductCollection)
+	{		
+	
+	  $arrProducts = $objProductCollection->getProducts();
+	  
+	  foreach ($arrProducts as $objProduct)
+		{
+      if (strlen($this->Input->post('depot', true)) && $this->Input->post('depot', true) != $objProduct->depot)
+      { 
+          next;       
+      }
+      else
+      {
+		    $objImage = $this->Database->prepare("SELECT href_product_img FROM tl_iso_order_items WHERE id=?")->limit(1)->execute($objProduct->cart_id)->fetchAssoc();
+		
+			  $arrItems[] = array
+			  (
+				  'raw'				        => $objProduct->getData(),
+				  'product_options' 	=> $objProduct->getOptions(),
+				  'name'				      => $objProduct->name,			
+				  'depot'				      => $objProduct->depot,
+				  'quantity'			    => $objProduct->quantity_requested,
+				  'price'				      => $objProduct->formatted_price,
+				  'total'				      => $objProduct->formatted_total_price,
+				  'tax_id'			      => $objProduct->tax_id,
+				  'href_img'          => $objImage['href_product_img'],
+			  );
+			}
+		}
+		
+		$objTemplate->items = $arrItems;
+	  $objTemplate->orderID = $objProductCollection->order_id;
+	}
 }
 

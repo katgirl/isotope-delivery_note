@@ -21,23 +21,20 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Kirsten Roschanski (C) 2012 
+ * @copyright  Kirsten Roschanski 2012 
  * @author     Kirsten Roschanski 
- * @package    Isotope 
+ * @package    Isotope
  * @license    LGPL 
  * @filesource
  */
- 
-$GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'Lieferschein';
 
-$GLOBALS['TL_LANG']['DEPOT']['CPI'] = 'CupPrint Ireland';
-$GLOBALS['TL_LANG']['DEPOT']['CPNL'] = 'Reclamebeker NL';
-$GLOBALS['TL_LANG']['DEPOT']['PK'] = 'Pack-Kontor';
-$GLOBALS['TL_LANG']['DEPOT']['CPG'] = 'CupPrint Germany';
-
-$GLOBALS['TL_LANG']['ISO']['depot'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['depot'] = array
 (
-  'Lagerstandort',
-  'Wählen Sie einen zutreffenden Lagerort.',
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['depot'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'default'                 => 'pending',
+	'options'         		    => $GLOBALS['ISO_DEPOT'],
+	'reference'               => &$GLOBALS['TL_LANG']['DEPOT'],
+	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 );
-

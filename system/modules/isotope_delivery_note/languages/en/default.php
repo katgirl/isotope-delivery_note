@@ -28,4 +28,4 @@
  * @filesource
  */
  
- $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'Delivery note';
+ $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'DeliveryNote';

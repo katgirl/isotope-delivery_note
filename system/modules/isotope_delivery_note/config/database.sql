@@ -7,6 +7,10 @@
 -- *                                                      *
 -- ********************************************************
 
+--
+-- Table `tl_iso_products`
+--
 
--- --------------------------------------------------------
-
+CREATE TABLE `tl_iso_products` (
+  `depot` varchar(64) NOT NULL default '',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
