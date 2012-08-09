@@ -47,6 +47,17 @@ $GLOBALS['TL_DCA']['tl_iso_orders']['list']['global_operations']['print_delivery
 		'attributes'          => 'onclick="Backend.getScrollOffset();"'
 );
 
+$GLOBALS['TL_DCA']['tl_iso_orders']['fields']['depot'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['ISO']['depot'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'default'                 => 'pending',
+	'options'         		    => $GLOBALS['ISO_DEPOT'],
+	'reference'               => &$GLOBALS['TL_LANG']['DEPOT'],
+	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+);
+
 /**
  * Class tl_iso_orders
  * Provide miscellaneous methods that are used by the data configuration array.
