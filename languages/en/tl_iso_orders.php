@@ -41,7 +41,6 @@ $GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_note'] = array
 
 $GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_notes'] = array
 (
-    'Delivery notes',
-    'Print delivery notes for order by status.'
+    'Print delivery notes',
+    'Print one or more delivery note by orderstatus. '
 );
-

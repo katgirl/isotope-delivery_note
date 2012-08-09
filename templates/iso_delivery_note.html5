@@ -6,7 +6,7 @@
 	<?php echo $this->logoImage; ?>
 	<br><br>
 
-	<h2><?php echo $this->invoiceTitle; ?></h2>
+	<h2><?php	echo $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] . ' ' . $this->orderID; ?></h2>
 
 	<?php foreach( $this->info as $type => $data ): ?>
 	<div class="info_container <?php echo $type . $data['class']; ?>">
@@ -16,7 +16,7 @@
 	<?php endforeach; ?>
 
 	<table cellspacing="0" cellpadding="5" width="100%" style="margin-left:25px; margin-right:25px">
-	<?php foreach( $this->items as $item ): ?>
+	<?php foreach( $this->depot_items as $item ): ?>
 		<tr>
 			<td width="60%">
 				<?php echo $item['name']; ?><br />

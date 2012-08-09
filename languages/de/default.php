@@ -30,10 +30,13 @@
  
 $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'Lieferschein';
 
-$GLOBALS['TL_LANG']['DEPOT']['A'] = 'Lager A';
-$GLOBALS['TL_LANG']['DEPOT']['B'] = 'Lager B';
-$GLOBALS['TL_LANG']['DEPOT']['C'] = 'Lager C';
-$GLOBALS['TL_LANG']['DEPOT']['D'] = 'Lager D';
+$GLOBALS['TL_LANG']['DEPOT'] = array 
+(
+  'A' => 'Lager A',
+  'B' => 'Lager B',
+  'C' => 'Lager C',
+  'D' => 'Lager D',
+);
 
 $GLOBALS['TL_LANG']['ISO']['depot'] = array
 (

@@ -34,28 +34,28 @@
 
 $GLOBALS['TL_DCA']['tl_iso_orders']['list']['operations']['print_delivery_note'] = array
 (
-		'label'               => &$GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_note'],
-		'href'                => 'key=print_delivery_note',
-		'icon'                => 'system/modules/isotope/html/document-pdf-text.png'
+		'label'      => &$GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_note'],
+		'href'       => 'key=print_delivery_note',
+		'icon'       => 'system/modules/isotope/html/document-pdf-text.png'
 );
 
 $GLOBALS['TL_DCA']['tl_iso_orders']['list']['global_operations']['print_delivery_notes'] = array
 (
-		'label'               => &$GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_notes'],
-		'href'                => 'key=print_delivery_notes',
-		'class'               => 'header_print_invoices isotope-tools',
-		'attributes'          => 'onclick="Backend.getScrollOffset();"'
+		'label'      => &$GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_notes'],
+		'href'       => 'key=print_delivery_notes',
+		'class'      => 'header_print_invoices isotope-tools',
+		'attributes' => 'onclick="Backend.getScrollOffset();"'
 );
 
 $GLOBALS['TL_DCA']['tl_iso_orders']['fields']['depot'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['ISO']['depot'],
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'default'                 => 'pending',
-	'options'         		    => $GLOBALS['ISO_DEPOT'],
-	'reference'               => &$GLOBALS['TL_LANG']['DEPOT'],
-	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+	  'label'      => &$GLOBALS['TL_LANG']['ISO']['depot'],
+	  'exclude'    => true,
+	  'inputType'  => 'select',
+	  'default'    => 'pending',
+	  'options'		 => $GLOBALS['TL_LANG']['DEPOT'],
+	  'reference'  => &$GLOBALS['TL_LANG']['DEPOT'],
+	  'eval'       => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 );
 
 /**

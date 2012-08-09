@@ -21,24 +21,17 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Kirsten Roschanski 2012 
+ * @copyright  Kirsten Roschanski &#40;2012&#41; 
  * @author     Kirsten Roschanski 
  * @package    Isotope
  * @license    LGPL 
  * @filesource
  */
-
-
- 
- // Depots 
- $GLOBALS['ISO_DEPOT'] = array('A', 'B', 'C', 'D');
  
  // BE-Module
  $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_note'] = array('DeliveryNoteBackend','printDeliveryNote');
  $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_notes'] = array('DeliveryNoteBackend','printDeliveryNotes');
  
- 
- // Hooks
+ // HOOK
  $GLOBALS['ISO_HOOKS']['generateCollection'][] = array('IsotopeDeliveryNote','generateCollection');
- 
 ?>

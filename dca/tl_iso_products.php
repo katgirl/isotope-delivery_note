@@ -35,7 +35,7 @@ $GLOBALS['TL_DCA']['tl_iso_products']['fields']['depot'] = array
 	'exclude'     => true,
 	'inputType'   => 'select',
 	'default'     => 'pending',
-	'options'     => $GLOBALS['ISO_DEPOT'],
+	'options'     => $GLOBALS['TL_LANG']['DEPOT'],
 	'reference'   => &$GLOBALS['TL_LANG']['DEPOT'],
 	'eval'        => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'attributes'	=> array('legend'=>'shipping_legend'),

@@ -81,6 +81,8 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
 		}
 	}
 
+
+
 	/**
 	 * Find a record by its reference field and return true if it has been found
 	 * @param string
@@ -149,19 +151,23 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
 	 * @param int, string
 	 * @return string
 	 */	
-	public function generateCollection($objTemplate, $objProductCollection)
+	public function generateCollection(&$objTemplate, IsotopeProductCollection $objProductCollection)
 	{		
-	
 	  $arrProducts = $objProductCollection->getProducts();
-	  
+	  $arrItems = array();
+ 	  
 	  foreach ($arrProducts as $objProduct)
 		{
-      if (strlen($this->Input->post('depot', true)) && $this->Input->post('depot', true) != $objProduct->depot)
+
+
+      if (strlen($this->Input->post('depot', true)) && $this->Input->post('depot') != $objProduct->depot)
       { 
           next;       
       }
       else
-      {		
+      {	      
+		    $objImage = $this->Database->prepare("SELECT href_product_img FROM tl_iso_order_items WHERE id=?")->limit(1)->execute($objProduct->cart_id)->fetchAssoc();
+		
 			  $arrItems[] = array
 			  (
 				  'raw'				        => $objProduct->getData(),
@@ -172,11 +178,12 @@ class IsotopeDeliveryNote extends IsotopeProductCollection
 				  'price'				      => $objProduct->formatted_price,
 				  'total'				      => $objProduct->formatted_total_price,
 				  'tax_id'			      => $objProduct->tax_id,
+				  'href_img'          => $objImage['href_product_img'],
 			  );
 			}
 		}
-		
-		$objTemplate->items = $arrItems;
+
+		$objTemplate->depot_items = $arrItems; 		
 	  $objTemplate->orderID = $objProductCollection->order_id;
 	}
 }
