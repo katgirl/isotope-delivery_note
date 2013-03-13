@@ -1,60 +1,101 @@
-<div style="font-size: 62.5%; font-family: Arial, Helvetica, sans-serif">
-	<table cellspacing="0" cellpadding="20" border="1">
-	<tr>
-	<td>
+<?php         
+    $this->loadLanguageFile('countries');
+$this->loadLanguageFile('tl_iso_config');
+include(TL_ROOT . '/system/config/countries.php');
+list($title['name'], $title['id'], $title['date'], $title['time']) = explode(" ", $this->invoiceTitle );
+?>
 
-	<?php echo $this->logoImage; ?>
-	<br><br>
+<div style="font-size: 72.5%; font-family: Helvetica, sans-serif; float:left;">
+  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td colspan="2" align="center"><?php echo $this->logoImage; ?><br><br></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="60%"
+          ><span style="font-size: 65%;text-decoration: underline;"><?php
+			echo $this->config['company'] . " · " . 
+			     $this->config['firstname'] . " " . 
+			     $this->config['lastname'] . " · " .
+			     $this->config['street_1'] . " · " .
+			     $this->config['postal'] . " · " .
+			     $this->config['city'];
+	    ?></span><br><?php
+        echo $this->arrShippingAddress['company'] . '<br>' .
+        $this->arrShippingAddress['firstname'] . ' ' .
+        $this->arrShippingAddress['lastname'] . '<br>' .
+        $this->arrShippingAddress['street_1'] . '<br>' .
+        $this->arrShippingAddress['postal'] . ' ' .
+        $this->arrShippingAddress['city'] . '<br><br>' .
+        $GLOBALS['TL_LANG']['CNT'][$this->arrShippingAddress['country']];
+        ?><br><br><br><br><br><br
+            ><span style="font-size: 100%;font-weight: bold;"><?php echo $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title']; ?></span><br><br
+            >Kundennummer: <?php echo $this->pid > 0 ? $this->pid : "-"; ?><br
+            >Bestelldatum: <?php  echo $this->date; ?><br
+            >Bestellnummer: <?php echo $title['id']; ?><br
+            >Datum: <?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime("now")); ?>
+      </td>
+      <td width="40%"
+          ><strong><?php echo $this->config['company']; ?></strong><br
+          ><?php echo $this->config['firstname'] . " " . $this->config['lastname']; ?><br
+          ><?php echo $this->config['street_1']; ?><br
+          ><?php echo $this->config['postal'] . " " . $this->config['city']; ?><br
+          ><?php echo $GLOBALS['TL_LANG']['CNT'][$this->config['country']]; ?><br><br
+          >phone <?php echo $this->config['phone']; ?><br
+          ><?php echo $this->config['email']; ?><br
+          ><?php echo $_SERVER["SERVER_NAME"]; ?><br><br
+          >Bank<br
+          >Sparkasse<br
+          >Konto 123456789<br
+          >BLZ 10000000<br
+          >IBAN: DE123456789000000<br
+          >BIC-/SWIFT-Code: ABCDEFGHIJ<br><br
+          >Umsatz-Steuer-ID: 123456789
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
 
-	<h2><?php	echo $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] . ' ' . $this->orderID; ?></h2>
-
-	<?php foreach( $this->info as $type => $data ): ?>
-	<div class="info_container <?php echo $type . $data['class']; ?>">
-		<h3><?php echo $data['headline']; ?></h3>
-		<div class="info"><?php echo $data['info']; ?></div>
-	</div>
-	<?php endforeach; ?>
-
-	<table cellspacing="0" cellpadding="5" width="100%" style="margin-left:25px; margin-right:25px">
-	<?php foreach( $this->items as $item ): ?>
-		<tr>
-			<td width="60%">
-				<?php echo $item['name']; ?><br />
-				<?php if(is_array($item['product_options']) && count($item['product_options'])): ?>
-				<ul>
-				<?php foreach($item['product_options'] as $option): ?>
-					<li><strong><?php echo $option['label']; ?>:</strong> <?php echo $option['value']; ?></li>
-				<?php endforeach; ?>
-				</ul>
-				<?php endif; ?>
-			</td>
-			<td width="5%"><?php echo $item['quantity']; ?> x </td>
-			<td width="15%" align="right"><?php echo $item['price']; ?></td>
-			<td width="15%" align="right"><?php echo $item['total']; ?></td>
-	    	<td width="5%"><?php echo $product['tax_id']; ?></td>
-		</tr>
-        <?php endforeach; ?>
-		<tr>
-			<td colspan="2"><?php echo $this->subTotalLabel; ?></td>
-			<td colspan="2" align="right"><?php echo $this->subTotalPrice; ?></td>
-			<td>&nbsp;</td>
-		</tr>
-        <?php if (is_array($this->surcharges)): foreach( $this->surcharges as $surcharge ): ?>
-		<tr>
-			<td colspan="2"><?php echo $surcharge['label']; ?></td>
-			<td align="right"><?php echo $surcharge['price']; ?></td>
-			<td align="right"><?php echo $surcharge['total_price']; ?></td>
-			<td><?php echo $surcharge['tax_id']; ?></td>
-		</tr>
-        <?php endforeach; endif; ?>
-		<tr>
-			<td colspan="2"><?php echo $this->grandTotalLabel; ?></td>
-			<td colspan="2" align="right"><?php echo $this->grandTotal; ?></td>
-			<td>&nbsp;</td>
-		</tr>
-	</table>
-
-	</td>
-	</tr>
-	</table>
+  <table cellspacing="0" cellpadding="5" width="100%" style="margin-left:25px; margin-right:25px">
+    <tr>
+      <td width="15%">Artikelnummer</td>
+      <td width="10%">Anzahl</td>
+      <td width="75%">Beschreibung</td>
+    </tr>
+    <?php foreach( $this->items as $item ): ?>
+    <tr>
+      <td width="15%"><?php echo $item['raw']['sku']; ?></td>
+      <td width="10%"><?php echo $item['quantity']; ?></td>
+      <td width="75%">
+        <?php echo $item['name']; ?><br />
+        <?php if(is_array($item['product_options']) && count($item['product_options'])): ?>
+        <ul>
+          <?php foreach($item['product_options'] as $option): ?>
+          <li><strong><?php echo $option['label']; ?>:</strong> <?php echo $option['value']; ?></li>
+          <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+      </td>
+    </tr>
+    <?php endforeach; ?>
+  </table>
 </div>
+
