@@ -29,17 +29,3 @@
  */
  
   $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title'] = 'DeliveryNote';
- 
-  $GLOBALS['TL_LANG']['DEPOT'] = array 
-  (
-    'A' => 'Depot A',
-    'B' => 'Depot B',
-    'C' => 'Depot C',
-    'D' => 'Depot D',
-  );
-
-  $GLOBALS['TL_LANG']['ISO']['depot'] = array
-  (
-    'Depot',
-    'Please select the depot.',
-  );

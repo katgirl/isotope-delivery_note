@@ -31,7 +31,4 @@
  // BE-Module
  $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_note'] = array('DeliveryNoteBackend','printDeliveryNote');
  $GLOBALS['BE_MOD']['isotope']['iso_orders']['print_delivery_notes'] = array('DeliveryNoteBackend','printDeliveryNotes');
- 
- // HOOK
- $GLOBALS['ISO_HOOKS']['generateCollection'][] = array('IsotopeDeliveryNote','generateCollection');
-?>
+

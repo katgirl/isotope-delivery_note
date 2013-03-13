@@ -47,33 +47,32 @@ $GLOBALS['TL_DCA']['tl_iso_orders']['list']['global_operations']['print_delivery
 		'attributes' => 'onclick="Backend.getScrollOffset();"'
 );
 
-$GLOBALS['TL_DCA']['tl_iso_orders']['fields']['depot'] = array
-(
-	  'label'      => &$GLOBALS['TL_LANG']['ISO']['depot'],
-	  'exclude'    => true,
-	  'inputType'  => 'select',
-	  'default'    => 'pending',
-	  'options'		 => $GLOBALS['TL_LANG']['DEPOT'],
-	  'reference'  => &$GLOBALS['TL_LANG']['DEPOT'],
-	  'eval'       => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
-);
-
 /**
  * Class tl_iso_orders
  * Provide miscellaneous methods that are used by the data configuration array.
  */
-class DeliveryNoteBackend extends Backend
+class DeliveryNoteBackend extends tl_iso_orders
 {
 
 	/**
 	 * Provide a select menu to choose orders by status and print PDF
-	 * @return string
 	 */
 	public function printDeliveryNotes()
 	{
-		$strMessage = '';
+		$objOrders = $this->Database->prepare("SELECT id FROM tl_iso_orders WHERE status=?")->execute($this->Input->post('status'));
 
-		$strReturn = '
+		if ($objOrders->numRows)
+		{
+			$this->generateDeliveryNote($objOrders->fetchEach('id'));
+		}
+		else
+		{
+			$strMessage = '<p class="tl_gerror">'.$GLOBALS['TL_LANG']['MSC']['noOrders'].'</p>';
+		}
+
+    $strMessage = '';
+
+    $strReturn = '
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=print_delivery_notes', '', $this->Environment->request)).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
@@ -85,24 +84,23 @@ class DeliveryNoteBackend extends Backend
 <div class="tl_formbody_edit">
 <div class="tl_tbox block">';
 
-		$objWidgetStatus = new SelectMenu($this->prepareForWidget($GLOBALS['TL_DCA']['tl_iso_orders']['fields']['status'], 'status'));
-		$objWidgetDepot  = new SelectMenu($this->prepareForWidget($GLOBALS['TL_DCA']['tl_iso_orders']['fields']['depot'], 'depot'));
+    $objWidget = new SelectMenu($this->prepareForWidget($GLOBALS['TL_DCA']['tl_iso_orders']['fields']['status'], 'status'));
 
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_print_delivery_notes')
-		{
-			$objOrders = $this->Database->prepare("SELECT id FROM tl_iso_orders WHERE status=?")->execute($this->Input->post('status'));
+    if ($this->Input->post('FORM_SUBMIT') == 'tl_print_delivery_notes')
+    {
+      $objOrders = $this->Database->prepare("SELECT id FROM tl_iso_orders WHERE status=?")->execute($this->Input->post('status'));
 
-			if ($objOrders->numRows)
-			{
-				$this->generateDeliveryNote($objOrders->fetchEach('id'), $this->Input->post('depot'));
-			}
-			else
-			{
-				$strMessage = '<p class="tl_gerror">'.$GLOBALS['TL_LANG']['MSC']['noOrders'].'</p>';
-			}
-		}
+      if ($objOrders->numRows)
+      {
+        $this->generateDeliveryNote($objOrders->fetchEach('id'));
+      }
+      else
+      {
+        $strMessage = '<p class="tl_gerror">'.$GLOBALS['TL_LANG']['MSC']['noOrders'].'</p>';
+      }
+    }
 
-		return $strReturn . $strMessage . '<div class="w50">' . $objWidgetStatus->parse() . '</div><div class="w50">' . $objWidgetDepot->parse() . '</div>
+    return $strReturn . $strMessage . $objWidget->parse() . '
 </div>
 </div>
 <div class="tl_formbody_submit">
@@ -118,41 +116,10 @@ class DeliveryNoteBackend extends Backend
 	/**
 	 * Print one order as PDF
 	 * @param DataContainer
-	 * @return void
 	 */
 	public function printDeliveryNote(DataContainer $dc)
 	{
-    $strMessage = '';
-
-		$strReturn = '
-<div id="tl_buttons">
-<a href="'.ampersand(str_replace('&key=print_delivery_note', '', $this->Environment->request)).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
-</div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_iso_orders']['print_delivery_note'][0].'</h2>
-<form action="'.$this->Environment->request.'"  id="tl_print_delivery_note" class="tl_form" method="post">
-<input type="hidden" name="FORM_SUBMIT" value="tl_print_delivery_note">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<div class="tl_formbody_edit">
-<div class="tl_tbox block">';
-
-		$objWidget = new SelectMenu($this->prepareForWidget($GLOBALS['TL_DCA']['tl_iso_orders']['fields']['depot'], 'depot'));
-
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_print_delivery_note')
-		{
       $this->generateDeliveryNote(array($dc->id));
-		}
-
-		return $strReturn . $strMessage . $objWidget->parse() . '
-</div>
-</div>
-<div class="tl_formbody_submit">
-<div class="tl_submit_container">
-<input type="submit" name="print_delivery_note" id="ctrl_print_delivery_note" value="'.$GLOBALS['TL_LANG']['MSC']['labelSubmit'].'">
-</div>
-</div>
-</form>
-</div>';		
 	}
 
 
