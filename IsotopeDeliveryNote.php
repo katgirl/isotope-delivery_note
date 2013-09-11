@@ -31,7 +31,7 @@ class IsotopeDeliveryNote extends IsotopeOrder
    */
   public function getGenerateCollection(&$objTemplate, $arrItems, IsotopeProductCollection $objProductCollection) 
   { 
-    echo $objTemplate->getName();
+
     if ( ! preg_match("/iso_delivery_note/", $objTemplate->getName() ) )
     { 
       return;
