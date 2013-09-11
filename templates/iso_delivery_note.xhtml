@@ -1,59 +1,75 @@
-<?php
-    $this->loadLanguageFile('countries');
-    $this->loadLanguageFile('tl_iso_config');
-    include(TL_ROOT . '/system/config/countries.php');
-    list($title['name'], $title['id'], $title['date'], $title['time']) = explode(" ", $this->invoiceTitle );
-    ?>
+<?php   
+/**
+ * PHP version 5
+ * @copyright  Copyright (C) 2012-2013 Kirsten Roschanski
+ * @author     Kirsten Roschanski <kat@kirsten-roschanski.de>
+ * @license    http://opensource.org/licenses/lgpl-3.0.html
+ * @package    IsotopeDeliveryNote 
+ * @filesource https://github.com/katgirl/isotope-delivery_note
+ */
+       
+  $this->loadLanguageFile('countries');
+  $this->loadLanguageFile('tl_iso_config');
+  include(TL_ROOT . '/system/config/countries.php');
+?>
 
 <div style="font-size: 72.5%; font-family: Helvetica, sans-serif; float:left;">
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
-      <td colspan="2" align="center"><?php echo $this->logoImage; ?><br><br></td>
+      <td colspan="2" align="center"><?php echo $this->logoImage; ?><br /><br /></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td width="60%"
-          ><span style="font-size: 65%;text-decoration: underline;"><?php
-          echo $this->config['company'] . " · " .
-          $this->config['firstname'] . " " .
-          $this->config['lastname'] . " · " .
-          $this->config['street_1'] . " · " .
-          $this->config['postal'] . " · " .
-          $this->config['city'];
-          ?></span><br><?php
-          echo $this->arrShippingAddress['company'] . '<br>' .
-          $this->arrShippingAddress['firstname'] . ' ' .
-          $this->arrShippingAddress['lastname'] . '<br>' .
-          $this->arrShippingAddress['street_1'] . '<br>' .
-          $this->arrShippingAddress['postal'] . ' ' .
-          $this->arrShippingAddress['city'] . '<br><br>' .
-          $GLOBALS['TL_LANG']['CNT'][$this->arrShippingAddress['country']];
-          ?><br><br><br><br><br><br
-          ><span style="font-size: 100%;font-weight: bold;"><?php echo $GLOBALS['TL_LANG']['MSC']['iso_delivery_note_title']; ?></span><br><br
-          >Kundennummer: <?php echo $this->pid > 0 ? $this->pid : "-"; ?><br
-          >Bestelldatum: <?php  echo $this->date; ?><br
-          >Bestellnummer: <?php echo $title['id']; ?><br
-          >Datum: <?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime("now")); ?>
-      </td>
-      <td width="40%"
-          ><strong><?php echo $this->config['company']; ?></strong><br
-          ><?php echo $this->config['firstname'] . " " . $this->config['lastname']; ?><br
-          ><?php echo $this->config['street_1']; ?><br
-          ><?php echo $this->config['postal'] . " " . $this->config['city']; ?><br
-          ><?php echo $GLOBALS['TL_LANG']['CNT'][$this->config['country']]; ?><br><br
-          >phone <?php echo $this->config['phone']; ?><br
-          ><?php echo $this->config['email']; ?><br
-          ><?php echo $_SERVER["SERVER_NAME"]; ?><br><br
-          >Bank<br
-          >Sparkasse<br
-          >Konto 123456789<br
-          >BLZ 10000000<br
-          >IBAN: DE123456789000000<br
-          >BIC-/SWIFT-Code: ABCDEFGHIJ<br><br
-          >Umsatz-Steuer-ID: 123456789
+      <td width="60%"><span style="font-size: 65%;text-decoration: underline;"><?php
+      echo $this->config['company'] . " · " . 
+           $this->config['firstname'] . " " . 
+           $this->config['lastname'] . " · " .
+           $this->config['street_1'] . " · " .
+           $this->config['postal'] . " · " .
+           $this->config['city'];
+      ?></span><br /><?php
+        echo $this->arrShippingAddress['company'] ? $this->arrShippingAddress['company'] . "<br />" : "";
+        echo $this->arrShippingAddress['firstname'] . " "; 
+        echo $this->arrShippingAddress['lastname'] . "<br />";
+        echo $this->arrShippingAddress['street_1'] ? $this->arrShippingAddress['street_1'] . "<br />" : "";
+        echo $this->arrShippingAddress['street_2'] ? $this->arrShippingAddress['street_2'] . "<br />" : "";
+        echo $this->arrShippingAddress['street_3'] ? $this->arrShippingAddress['street_3'] . "<br />" : "";
+        echo $this->arrShippingAddress['postal'] . " ";
+        echo $this->arrShippingAddress['city'] . "<br /><br />"; 
+        echo $GLOBALS['TL_LANG']['CNT'][$this->arrShippingAddress['country']];     
+      ?><br /><br /><br /><br /><br /><br    
+      ><span style="font-size: 100%;font-weight: bold;"><?php echo $this->deliveryNoteTitle; ?></span><br /><br
+      ><?php echo $GLOBALS['TL_LANG']['isoDeliveryNote']['customerID']; ?>: <?php echo $this->pid > 0 ? $this->pid : "-"; ?><br
+      ><?php echo $this->orderDateLabel . ": " . $this->orderDate; ?><br
+      ><?php echo $this->orderIdLabel . ": " . $this->orderId; ?><br
+      ><?php echo $GLOBALS['TL_LANG']['isoDeliveryNote']['date']; ?>: <?php echo $this->orderDate; ?>
+    </td>
+    <td width="40%"><strong><?php 
+        echo $this->config['company'] ? $this->config['company'] : ""; 
+        echo "</strong><br />";
+        echo $this->config['firstname'] . " " . $this->config['lastname']. "<br />";
+        echo $this->config['street_1'] ? $this->config['street_1'] . "<br />" : ""; 
+        echo $this->config['street_2'] ? $this->config['street_2'] . "<br />" : ""; 
+        echo $this->config['street_3'] ? $this->config['street_3'] . "<br />" : ""; 
+        echo $this->config['postal'] . " " . $this->config['city'] . "<br />";
+        echo $GLOBALS['TL_LANG']['CNT'][$this->config['country']] . "<br /><br />";
+        echo $GLOBALS['TL_LANG']['tl_iso_config']['phone'][0] . ": " . $this->config['phone'] . "<br />";
+        echo $this->config['email'] . "<br />";
+        echo $_SERVER["SERVER_NAME"] . "<br /><br />";
+        if(strlen($this->config['bank_name']) > 0): 
+          echo "<br />";
+          echo $GLOBALS['TL_LANG']['tl_iso_config']['bank_name'][0] . "<br />";
+          echo $this->config['bank_name'] . "<br />";
+          echo $GLOBALS['TL_LANG']['tl_iso_config']['bank_id'][0] . ": " . $this->config['bank_id'] . "<br />";
+          echo $GLOBALS['TL_LANG']['tl_iso_config']['account_number'][0] . ": " . $this->config['account_number'] . "<br />";
+          echo $GLOBALS['TL_LANG']['tl_iso_config']['iban'][0] . ": " . $this->config['iban'] . "<br />";
+          echo $GLOBALS['TL_LANG']['tl_iso_config']['bic'][0] . ": " . $this->config['bic']; 
+        endif; ?><br /><br
+        ><?php if(strlen($this->config['tax_number']) > 0): echo $GLOBALS['TL_LANG']['tl_iso_config']['tax_number'][0] . ": " . $this->config['tax_number']; endif; ?><br
+        ><?php if(strlen($this->config['vat_no']) > 0): echo $GLOBALS['TL_LANG']['tl_iso_config']['vat_no'][0] . ": " . $this->config['vat_no']; endif; ?>
       </td>
     </tr>
     <tr>
@@ -76,9 +92,9 @@
 
   <table cellspacing="0" cellpadding="5" width="100%" style="margin-left:25px; margin-right:25px">
     <tr>
-      <td width="15%">Artikelnummer</td>
-      <td width="10%">Anzahl</td>
-      <td width="75%">Beschreibung</td>
+      <td width="15%"><?php echo $GLOBALS['TL_LANG']['isoInvoice']['sku']; ?></td>
+      <td width="10%"><?php echo $GLOBALS['TL_LANG']['isoInvoice']['quantity']; ?></td>
+      <td width="75%"><?php echo $GLOBALS['TL_LANG']['isoInvoice']['item']; ?></td>
     </tr>
     <?php foreach( $this->items as $item ): ?>
     <tr>

@@ -1,39 +1,49 @@
 <?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
  * PHP version 5
- * @copyright  Kirsten Roschanski &#40;2012&#41; 
- * @author     Kirsten Roschanski 
- * @package    Isotope
- * @license    LGPL 
- * @filesource
+ * @copyright  Copyright (C) 2012-2013 Kirsten Roschanski
+ * @author     Kirsten Roschanski <kat@kirsten-roschanski.de>
+ * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
+ 
+/**
+ * Class IsotopeDeliveryNote
+ *
+ * @copyright  Copyright (C) 2012-2013 Kirsten Roschanski
+ * @author     Kirsten Roschanski <kat@kirsten-roschanski.de>
+ * @package    IsotopeDeliveryNote 
+ * @filesource https://github.com/katgirl/isotope-delivery_note
+ */ 
  
 class IsotopeDeliveryNote extends IsotopeOrder
 {
-	/**
-	 * Template
-	 * @var string
-	 */
-    protected $strTemplate = 'iso_delivery_note';
+  
+  /**
+   * Template
+   * @var string
+   */
+  protected $strTemplate = 'iso_delivery_note';
+    
+    
+  /**
+   * New parameter for TemplateObject
+   */
+  public function getGenerateCollection(&$objTemplate, $arrItems, IsotopeProductCollection $objProductCollection) 
+  { 
+    echo $objTemplate->getName();
+    if ( ! preg_match("/iso_delivery_note/", $objTemplate->getName() ) )
+    { 
+      return;
+    }
+    
+    $objTemplate->deliveryNoteTitle  = $GLOBALS['TL_LANG']['isoDeliveryNote']['iso_delivery_note_title']; 
+    $objTemplate->orderIdLabel       = $GLOBALS['TL_LANG']['isoDeliveryNote']['orderIdLabel'];
+    $objTemplate->orderId            = $objProductCollection->order_id;
+    $objTemplate->orderDateLabel     = $GLOBALS['TL_LANG']['isoDeliveryNote']['orderDateLabel'];
+    $objTemplate->orderDate          = date($GLOBALS['TL_CONFIG']['dateFormat'], $objProductCollection->date);
+    $objTemplate->arrBillingAddress  = $objProductCollection->billing_address;
+    $objTemplate->arrShippingAddress = $objProductCollection->shipping_address ? $objProductCollection->shipping_address : $objProductCollection->billing_address;
+  }   
 }
 
